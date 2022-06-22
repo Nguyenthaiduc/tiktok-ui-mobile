@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Tiktok-Demo',
       home: Scaffold(
         body: Container(
           decoration: BoxDecoration(color: Colors.yellowAccent),
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
             child: Container(
           height: 100,
           decoration: BoxDecoration(color: Colors.blueAccent),
+          child: BtmBar(),
         )),
       ),
     );
@@ -50,7 +52,8 @@ class Home extends StatelessWidget {
           width: 0.70 + screenWidth,
           height: 150,
           child: Container(
-            decoration: BoxDecoration(color: Colors.redAccent),
+            // decoration: BoxDecoration(color: Colors.redAccent),
+            child: BtnContent(),
           ),
         ),
         Positioned(
@@ -120,9 +123,8 @@ class _TopTabState extends State<TopTab> with SingleTickerProviderStateMixin {
         ),
         Flexible(
           flex: 2,
-          child: Row(
-            children: [
-            SizedBox(width:20),
+          child: Row(children: [
+            SizedBox(width: 20),
             Icon(
               Icons.live_tv,
               size: 30,
@@ -134,19 +136,90 @@ class _TopTabState extends State<TopTab> with SingleTickerProviderStateMixin {
   }
 }
 
-class BtmBar  extends StatelessWidget {
-  const BtmBar ({ Key? key }) : super(key: key);
+class BtmBar extends StatelessWidget {
+  const BtmBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(children: <Widget>[
-        Expanded(flex: 1, child: Text("A"),),
-        Expanded(flex: 1, child: Text("B"),),
-        Expanded(flex: 1, child: Text("C"),),
-        Expanded(flex: 1, child: Text("D"),),
-        Expanded(flex: 1, child: Text("E"),),
-        Expanded(flex: 1, child: Text("F"),),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          getBtmTextWidget("A", true),
+          getBtmTextWidget("B", false),
+          AddIcon(),
+          getBtmTextWidget("C", false),
+          getBtmTextWidget("D", false),
+        ],
+      ),
+    );
+  }
+}
+
+class AddIcon extends StatelessWidget {
+  const AddIcon({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+      height: 35,
+      width: 60,
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            height: 35,
+            width: 50,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.cyan, borderRadius: BorderRadius.circular(10)),
+            ),
+          ),
+          Positioned(
+            height: 35,
+            width: 50,
+            right: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(10)),
+            ),
+          ),
+          Positioned(
+            height: 35,
+            width: 50,
+            right: 0,
+            child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Icon(Icons.add)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+getBtmTextWidget(String content, bool ifSelected) {
+  return Text("$content",
+      style: ifSelected
+          ? TextStyle(fontSize: 18, color: Colors.white)
+          : TextStyle(fontSize: 18, color: Colors.grey[600]));
+}
+
+class BtnContent extends StatelessWidget {
+  const BtnContent({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(children: <Widget>[
+        ListTile(title: Text("ABC"),subtitle: Text("Hello Tiktok")),
+        Row(children: <Widget>[
+          Icon(Icons.music_note),
+          Marquee(text: "BCDEF",), 
+        ])
       ],)
     );
   }
