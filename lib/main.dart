@@ -57,7 +57,6 @@ class Home extends StatelessWidget {
           ),
         ),
         Positioned(
-            bottom: 20,
             right: 0,
             width: 0.25 + screenWidth,
             height: 0.45 + screenheight,
@@ -107,7 +106,6 @@ class _TopTabState extends State<TopTab> with SingleTickerProviderStateMixin {
           child: Icon(
             Icons.search,
             size: 30,
-            color:Colors.white ,
           ),
         ),
         Expanded(
@@ -132,7 +130,6 @@ class _TopTabState extends State<TopTab> with SingleTickerProviderStateMixin {
             Icon(
               Icons.live_tv,
               size: 30,
-              color : Colors.white
             )
           ]),
         ),
@@ -293,7 +290,6 @@ class _RotateAlbumState extends State<RotateAlbum>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
       child: animation,
     );
   }
